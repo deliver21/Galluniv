@@ -1,0 +1,145 @@
+﻿@page
+@using GallUni.AppUtilities
+@model RegisterModel
+
+<div class="card shadow border-0 mt-5 py-1 mb-3">
+     <div class="card-header bg-primary bg-gradient mt-1 m-lg-0 py-1">
+        <div class="row">
+            <div class="col-12 text-center">
+                @if (User.IsInRole(SD.Role_Admin))
+                {
+                    <h3 class="py-2 text-white"> Register - ADMIN Portal</h3>
+                }
+                else
+                {
+                    <h2 class="py-2 text-white"> Register</h2>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-2">
+        <div class="row pt-2">
+            <div class="col-md-12">
+                <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+                    <h3 class="text-center border-bottom py-2 text-primary">Create a new account.</h3>        
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-floating mb-3 col-md-12">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email" class="ms-2 text-muted">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>                   
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password" class="ms-2 text-muted">Password</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                        <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirm password</label>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Input.Name" class="form-control" placeholder="Name" aria-required="true" />
+                        <label asp-for="Input.Name" class="ms-2 text-muted">Name</label>
+                        <span asp-validation-for="Input.Name" class="text-danger"></span>
+                    </div>
+                     <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Input.Surname" class="form-control" placeholder="Surname" aria-required="true" />
+                        <label asp-for="Input.Surname" class="ms-2 text-muted">Surname</label>
+                        <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                    </div>
+                     <div class="form-floating mb-3 col-md-6">
+                        <input type="date" asp-for="Input.Birthday" class="form-control" placeholder="Your Birthday" aria-required="true" />
+                        <label asp-for="Input.Birthday" class="ms-2 text-muted">Birthday</label>
+                        <span asp-validation-for="Input.Birthday" class="text-danger"></span>
+                    </div>
+                     <div class="form-floating mb-3 col-md-6">
+                        <input type="tel" asp-for="Input.PhoneNumber" class="form-control" placeholder="Your Birthday" aria-required="true" />
+                        <label asp-for="Input.PhoneNumber" class="ms-2 text-muted">Phone Number</label>
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                     <div class="form-floating mb-3 col-md-6">
+                        <input type="url" asp-for="Input.SocialMediaId" class="form-control" placeholder="Your Birthday" aria-required="true" />
+                        <label asp-for="Input.Birthday" class="ms-2 text-muted">Your Social media link</label>
+                        <span asp-validation-for="Input.SocialMediaId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 form-floating col-md-6">
+                            <select asp-for="Input.SpecialityId" asp-items="@Model.Input.SpecialityList" class="form-select">
+                                <option disabled selected>----Select Speciality----</option>
+                            </select>
+                            <label asp-for="Input.SpecialityId" class="ms-2"></label>
+                    </div>
+                    <div class="mb-3 form-floating col-md-6">
+                            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                <option disabled selected>----Select Role----</option>
+                            </select>
+                    </div>
+                    <div class="mb-3 form-floating col-md-6">
+                            <select asp-for="Input.CountryId" asp-items="@Model.Input.CountryList" class="form-select">
+                                <option disabled selected>----Select Country----</option>
+                            </select>
+                    </div>
+                    <div class="mb-3 form-floating col-md-6">
+                        @*name="file" is to return a file value which is its path in the target controller*@
+                                <input type="file" name="file" placeholder="" class="form-control" />
+                                <label asp-for="Input.ProfilePictureUrl" class="ms-2"> Choose a picture</label>
+                    </div>
+                    <div class="mb-3 form-floating col-md-6">
+                            <select asp-for="Input.MotherTongue" asp-items="@Model.Input.MotherTongueList.OrderBy(u=>u.Text).ToList()" class="form-select">
+                                <option disabled selected>----Select your native language----</option>
+                            </select>
+                    </div>
+                    <div class="mb-3 form-floating col-md-6">
+                            <select asp-for="Input.Gender" asp-items="@Model.Input.GenderList" class="form-select">
+                                <option disabled selected>----Select Gender----</option>
+                            </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+            @if (!User.IsInRole(SD.Role_Admin))
+            {
+                <div class="col-md-12 pb-3 text-center">
+                    <section>
+                      <p class="divider-text d-flex pt-3"></p>
+                        @if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                        {
+                           <div>
+                               <p>                                    
+                                   <a class="text-primary" href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                 @*     There are no external authentication services configured. See this article about setting up this ASP.NET application to support logging in via external services.
+                                  *@ </a>
+                               </p>
+                           </div>
+                        }
+                        else
+                        {
+                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                <div>
+                                   <p>
+                                        @foreach (var provider in Model.ExternalLogins!)
+                                        {
+                                            @if (provider.DisplayName == "Facebook")
+                                            {
+                                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                                   <i class="bi bi-facebook"></i>
+                                                </button>
+                                            }
+                                        }
+                                   </p>
+                                </div>
+                            </form>
+                        }
+                    </section>
+                </div>
+            }
+        </div>
+    </div>
+
+ </div>
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}

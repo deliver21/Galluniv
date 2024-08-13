@@ -1,0 +1,124 @@
+﻿@model ApplicationUser;
+<div class="card shadow border-0 mt-5 mb-1 pt-2">
+    <div class="card-header bg-primary py-3">
+        <div class="row">           
+           <div class="col-4 col-sm-4"></div>
+           <div class="col-4 text-center text-dark">
+              <h4> <strong>My Gallery</strong></h4>
+           </div>
+           <div class="col-4 col-sm-4 text-end">
+               <div class="dropdrown">
+                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="imageToUpload">
+                         <i class="bi bi-plus-circle"></i> Add Picture
+                    </button>
+                    <ul class="dropdown-menu p-1 border-1" aria-labelledby="imageToUpload">
+                        <li>
+                            <form method="post" enctype="multipart/form-data">
+                                <input asp-for="Id" hidden />
+                                <input asp-for="Name" hidden />
+                                <input asp-for="Surname" hidden />
+                                <input asp-for="CountryId" hidden />
+                                <input asp-for="ProfilePictureUrl" hidden />
+                                <input asp-for="City" hidden />
+                                <input asp-for="MotherTongue" hidden />
+                                <input asp-for="Birthday" hidden />
+                                <input asp-for="Gender" hidden />
+                                <input asp-for="SocialMediaId" hidden />
+                                <input asp-for="FacultyId" hidden />
+                                <input asp-for="SpecialityId" hidden />
+                                <input asp-for="Status" hidden />
+                                <input asp-for="TagId" hidden />                                
+                                <input class="form-control" type="file" name="files" multiple />
+                                <label asp-for="UserImages" class="form-label">Upload your picture</label>
+                                <button type="submit" class="bt btn-primary rounded-1 mt-1" style="width:100px">
+                                    Upload
+                                </button>
+                            </form>                            
+                        </li>
+                    </ul>
+               </div>    
+           </div>                
+        </div>
+    </div>
+    </div>
+    <div class="card-body bg-white pt-2">
+         <div class="row">
+        <div class="col-4">
+            @*User's Profile*@
+            @*<div class="container">
+             <!-- Close the image -->
+               <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+             <!-- Expanded image -->
+              <img id="expandedImg" style="width:100%">
+             <!-- Image text -->
+             <div id="imgtext"></div>
+           </div>*@
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="container text-center mb-3" style="background-size: contain;width: 100%;height: 405px;">
+                    <!-- Close the image -->
+                    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+                    <!-- Expanded image -->
+                     <img class="shadow-lg bg-light p-1" id="expandedImg" style="width:fit-content ; height:inherit;">
+                     <!-- Image text -->
+                    <div id="imgtext"></div>
+                </div>
+                 <!-- Modal -->
+               <div id="myModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                     <!-- Modal content-->
+                       <div class="modal-content">
+                          <div class="modal-header">
+                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+                             <h4 class="modal-title">Modal Header</h4>
+                          </div>
+                          <div class="modal-body">
+                          <p>Some text in the modal.</p>
+                       </div>
+                       <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                       </div>
+                   </div>
+
+                </div>
+            </div>
+        </div>
+            @if (Model.UserImages != null)
+            {
+                        <div class="row pt-2 rounded-1">
+                    @foreach (var img in Model.UserImages)
+                    {
+                                        <div class="col-lg-4 col-md-12 m-1 mb-4 mb-lg-0">
+                                            <img class="w-100 shadow-1-strong rounded mb-4" alt="Profile delivre" 
+                                              src="@img.UserImageUrl" onclick=myFunction(this)>
+                                              <a asp-action="DeleteImage" class="btn btn-danger btn-sm" asp-route-imageId="@img.Id">
+                                                          <i class="bi bi-trash"></i>
+                                              </a>
+                                        </div>
+                    }
+                        </div>
+            }
+            @* <div class="row pt-2 rounded-1">
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img class="w-100 shadow-1-strong rounded mb-4" alt="Profile delivre" 
+                    src="~/images/UserProfilePictures/5a3dca33-86e1-43e2-9c61-01a220b7c714.jpeg" onclick=myFunction(this)>
+                </div>
+                 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img class="w-100 shadow-1-strong rounded mb-4" alt="Front University" 
+                    src="/images/grsu_myuniver.org.jpg" onclick="myFunction(this)">
+                </div>
+                 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img class="w-100 shadow-1-strong rounded mb-4" alt="Summer university" 
+                    src="/images/grsu_leto_2018_foto1.jpg" onclick="myFunction(this)">
+                </div>
+            </div>  *@          
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+                  <script src="~/js/gallery.js"></script>      
+
+}

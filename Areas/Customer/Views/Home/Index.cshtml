@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row mt-2 p-1">
+    <div class="col-lg-6 col-sm-5 mt-5">
+        <img src="~/images/logo-grgu-im-yanki-kupaly.jpg" class="mt-4 mb-3" style="width:50px; height: 60px" />
+        <h3 class="text-dark mb-2">Yanka Kupala State University of Grodno</h3>
+        <div class="text-start">
+            <a class="col mr-5 font-italic text-decoration-none text-dark" href="https://maps.app.goo.gl/Euutfw6MB2pWraq97" target="_blank">
+                <img src="~/images/icons8-location.gif" style="width:20px; height:20px;" /> Grodno, Belarus
+            </a>
+            <a class="col text-decoration-none text-dark ml-3" href="https://www.grsu.by/" target="_blank">
+                <img src="~/images/2523_R1NUIExBUiAyMzAtMjE.jpg" style="width:25px;height:25px" class="pl-3" /> grsu.by
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-5">
+        <div class="text-end text-dark bg-white pt-2 mt-5 mb-0"> @DateTime.Now</div>
+
+           <!-- Carousel -->
+         <div id="demo" class="carousel slide text-center bg-white" data-bs-ride="carousel" 
+         style="height:100%; margin-left:10px; margin-top:10px; padding:5px" >
+
+                  <!-- Indicators/dots -->
+          <div class="carousel-indicators">
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+          </div>
+
+            <!-- The slideshow/carousel -->
+           <div class="carousel-inner text-center">
+              <div class="carousel-item active">
+                <img src="~/images/grsu_myuniver.org.jpg" alt="Main building" 
+                style="display: block;margin-left: auto;margin-right: auto;width: 100%;height:fit-content;" class="d-block w-75 rounded-3 shadow text-center">
+              </div>
+              <div class="carousel-item">
+                <img src="~/images/grsu_leto_2018_foto1.jpg" alt="Uni Summer" 
+                style="display: block;margin-left: auto;margin-right: auto;width: 100%;height:fit-content;" class="d-block w-75 rounded-3 shadow-lg text-center">
+              </div>    
+           </div> 
+                 <!-- Left and right controls/icons -->
+              @*<button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                 <span class="carousel-control-prev-icon"></span>
+              </button>
+              <button class="carousel-control-next text-dark" type="button" data-bs-target="#demo" data-bs-slide="next">
+                  <span class="carousel-control-next-icon text-dark"></span>
+              </button>*@
+       </div>
+    </div>
+</div>
+<section id="News&Events">
+    <div class="row">
+        <h4 class="mt-5 col-md-12 col-xl-12 mx-auto text-dark-subtle">
+            News & Events
+        </h4>
+    </div>
+</section>
